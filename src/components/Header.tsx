@@ -1,0 +1,54 @@
+import { Search, ShoppingCart, User, ChevronDown, X } from "lucide-react"
+
+export const Header = () => {
+  return (
+    <>
+      {/* Promotional Banner */}
+      <div className="bg-black text-white py-3 px-4 text-center text-sm">
+        <div className="flex items-center justify-center relative max-w-7xl mx-auto">
+          <span>
+            Sign up and get 20% off to your first order.{" "}
+            <span className="underline font-medium cursor-pointer">Sign Up Now</span>
+          </span>
+          <button className="absolute right-0 p-1">
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+
+      {/* Header */}
+      <header className="border-b border-gray-200 py-6 px-[100px]">
+        <div className="flex items-center justify-between">
+          <div className="font-alfa text-navbar-h1 font-bold text-black">FAKESTORE</div>
+
+          <nav className="hidden md:flex items-center space-x-8">
+            <div className="flex items-center space-x-1 cursor-pointer">
+              <span className="text-navbar-menu-text">Shop</span>
+              <ChevronDown className="w-4 h-4" />
+            </div>
+            <span className="text-navbar-menu-text cursor-pointer">On Sale</span>
+            <span className="text-navbar-menu-text cursor-pointer">New Arrivals</span>
+            <span className="text-navbar-menu-text cursor-pointer">Brands</span>
+          </nav>
+
+          <div className="flex items-center">
+            <div className="relative hidden md:block">
+              <img className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#00000066] w-6 h-6" src='search.svg' />
+              <input
+                type="text"
+                placeholder="Search for products..."
+                className="pl-10 pr-4 py-3 md:w-[505px] bg-[#F0F0F0] border-0 rounded-[62px] outline-none mr-10"
+              />
+            </div>
+            <button className="pr-[14px]">
+              <img className="w-6 h-6" src='cart.svg' />
+            </button>
+            <button>
+              <img className="w-6 h-6" src='profile.svg' />
+            </button>
+          </div>
+        </div>
+      </header>
+    </>
+  )
+}
