@@ -19,9 +19,9 @@ export const Header = () => {
       {/* Header */}
       <header className="border-b border-gray-200 py-6 px-[100px]">
         <div className="flex items-center justify-between">
-          <div className="font-alfa text-navbar-h1 font-bold text-black">FAKESTORE</div>
+          <div className="font-alfa text-navbar-h1 font-bold">FAKESTORE</div>
 
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center gap-6">
             <div className="flex items-center space-x-1 cursor-pointer">
               <span className="text-navbar-menu-text">Shop</span>
               <ChevronDown className="w-4 h-4" />

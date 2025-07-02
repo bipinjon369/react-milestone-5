@@ -49,6 +49,7 @@ module.exports = {
       fontSize: {
         'navbar-h1': ['32px', { lineHeight: '100%', fontWeight: '400' }],
         'navbar-menu-text': ['16px', { lineHeight: '100%', fontWeight: '400' }],
+        'hero-header-text': ['64px', { lineHeight: '100%', fontWeight: '400' }],
       },
       fontFamily: {
         alfa: ['Alfa Slab One', 'sans-serif'],

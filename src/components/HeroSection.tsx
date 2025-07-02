@@ -1,10 +1,10 @@
 export const HeroSection = () => {
   return (
-    <section className="bg-gray-50 py-16 px-4">
+    <section className="h-[calc(100vh-220px)] py-16 px-4 bg-[url('hero_background.png')] bg-cover bg-center bg-no-repeat">
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
           <div className="space-y-8">
-            <h2 className="text-5xl lg:text-6xl font-bold text-black leading-tight">
+            <h2 className="font-alfa text-hero-header-text">
               FIND CLOTHES
               <br />
               THAT MATCH YOUR
@@ -12,8 +12,9 @@ export const HeroSection = () => {
               STYLE PERFECTLY
             </h2>
             <p className="text-gray-600 mb-8 text-lg">
-              Browse through our diverse range of meticulously crafted garments, designed
-              to bring out your individuality and cater to your sense of style.
+              Browse through our diverse range of meticulously crafted garments,
+              <br />
+              designed to bring out your individuality and cater to your sense of style.
             </p>
             <button className="bg-black text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-gray-800 transition-colors">
               Shop Now
@@ -34,14 +35,6 @@ export const HeroSection = () => {
                 <div className="text-gray-600">Happy Customers</div>
               </div>
             </div>
-          </div>
-          
-          <div className="relative">
-            <img
-              src="/placeholder.svg?height=600&width=500"
-              alt="Fashion models"
-              className="w-full h-auto rounded-lg"
-            />
           </div>
         </div>
       </div>
