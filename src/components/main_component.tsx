@@ -72,13 +72,10 @@ const Homepage = () => {
       <ProductSection 
         title="NEW ARRIVALS" 
         products={newArrivals} 
-        showRating={true} 
-        showViewAll={true}
       />
       <ProductSection 
         title="CASUAL" 
         products={casualProducts} 
-        backgroundColor="bg-gray-50"
       />
       <StyleSection />
       <Footer />

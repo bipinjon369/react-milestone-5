@@ -1,20 +1,25 @@
 import { Search, ShoppingCart, User, ChevronDown, X } from "lucide-react"
+import { useState } from "react"
 
 export const Header = () => {
+  const [ showSignUpOffer, setShowSignUpOffer ] = useState<boolean>(true)
+  const setSignUpOffer = () => setShowSignUpOffer(false) // Sign
   return (
     <>
       {/* Promotional Banner */}
-      <div className="bg-black text-white py-3 px-4 text-center text-sm">
+      {
+        showSignUpOffer && 
+        <div className="bg-black text-white py-3 px-4 text-center text-sm">
         <div className="flex items-center justify-center relative max-w-7xl mx-auto">
           <span>
             Sign up and get 20% off to your first order.{" "}
             <span className="underline font-medium cursor-pointer">Sign Up Now</span>
           </span>
           <button className="absolute right-0 p-1">
-            <X className="w-4 h-4" />
+            <X className="w-4 h-4" onClick={setSignUpOffer} />
           </button>
         </div>
-      </div>
+      </div>}
 
       {/* Header */}
       <header className="border-b border-gray-200 py-6 px-[100px]">
