@@ -50,6 +50,8 @@ module.exports = {
         'navbar-h1': ['32px', { lineHeight: '100%', fontWeight: '400' }],
         'navbar-menu-text': ['16px', { lineHeight: '100%', fontWeight: '400' }],
         'hero-header-text': ['64px', { lineHeight: '100%', fontWeight: '400' }],
+        'button-text': ['16px', { lineHeight: '100%', fontWeight: '400' }],
+        'hero-stat-text': ['40px', { lineHeight: '100%', fontWeight: '700' }],
       },
       fontFamily: {
         alfa: ['Alfa Slab One', 'sans-serif'],

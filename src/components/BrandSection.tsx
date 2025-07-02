@@ -1,13 +1,13 @@
 export const BrandSection = () => {
-  const brands = ["VERSACE", "ZARA", "GUCCI", "PRADA", "Calvin Klein"]
+  const brands = ["VERSACE", "ZARA", "GUCCI", "PRADA", "Calvin_Klein"]
 
   return (
-    <section className="bg-black py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-black py-11">
+      <div className="mx-[100px]">
         <div className="flex justify-between items-center flex-wrap gap-8">
           {brands.map((brand, index) => (
-            <div key={index} className="text-white text-2xl font-bold">
-              {brand}
+            <div key={index} className="">
+              <img src={brand.toLocaleLowerCase() + '_logo.svg'}/>
             </div>
           ))}
         </div>
