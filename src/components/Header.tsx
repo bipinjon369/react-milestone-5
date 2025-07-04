@@ -1,5 +1,6 @@
 import { Search, ShoppingCart, User, ChevronDown, X } from "lucide-react"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export const Header = () => {
   const [ showSignUpOffer, setShowSignUpOffer ] = useState<boolean>(true)
@@ -24,7 +25,7 @@ export const Header = () => {
       {/* Header */}
       <header className="border-b border-gray-200 py-6 px-[100px]">
         <div className="flex items-center justify-between">
-          <div className="font-alfa text-navbar-h1 font-bold">FAKESTORE</div>
+          <Link to="/" className="font-alfa text-navbar-h1 font-bold">FAKESTORE</Link>
 
           <nav className="hidden md:flex items-center gap-6">
             <div className="flex items-center space-x-1 cursor-pointer">
@@ -45,9 +46,9 @@ export const Header = () => {
                 className="pl-10 pr-4 py-3 md:w-[505px] bg-[#F0F0F0] border-0 rounded-[62px] outline-none mr-10"
               />
             </div>
-            <button className="pr-[14px]">
+            <Link to="/cart" className="pr-[14px]">
               <img className="w-6 h-6" src='cart.svg' />
-            </button>
+            </Link>
             <button>
               <img className="w-6 h-6" src='profile.svg' />
             </button>
