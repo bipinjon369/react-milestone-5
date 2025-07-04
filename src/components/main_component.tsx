@@ -14,9 +14,10 @@ const Homepage = () => {
   const dispatch = useDispatch<AppDispatch>()
   const products = useSelector((state: RootState) => state.products.data)
   useEffect(() => {
-    const url: string =  'https://api.escuelajs.co/api/v1/products'
+    const url: string =  'products'
     dispatch(fetchList(url)) 
   })
+  // console.log('products', products)
   return (
     <div className="min-h-screen bg-white">
       <Header />

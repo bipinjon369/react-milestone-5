@@ -8,14 +8,12 @@ interface ListState {
     success: string | null;
     data?: any[]; // Adjust based on API response
     recordCount?: number
-    statusCode?: number // Add this line
-    entireResponse?: any
+    status?: boolean // Add this line
 }
 
 // Define the API response structure
 interface ApiResponse {
-    statusCode: number | undefined;
-    error: boolean;
+    status: boolean;
     data: any; // Adjust based on actual data structure
 }
 
@@ -37,8 +35,9 @@ export const fetchList = createAsyncThunk<ApiResponse, string, { rejectValue: Er
     async (payload, { rejectWithValue }) => {
         try {
             const { getAPI } = useApi();
-            const ApiResponse = await (`${payload}`);
-            return { ...ApiResponse, statusCode: ApiResponse.data.status }; // Return the status code along with the data
+            const ApiResponse = await getAPI(`${payload}`);
+            console.log('ApiResponse', ApiResponse);
+            return { ...ApiResponse, status: ApiResponse.error }; // Return the status code along with the data
         } catch (error: any) {
             console.error('Error fetching list:', error);
             return rejectWithValue({ message: error.message || 'Unknown error occurred' });
@@ -65,14 +64,14 @@ const productSlice = createSlice({
             })
             .addCase(fetchList.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
                 state.loading = false;
-                if (!action.payload.error) {
-                    state.data = action.payload.data.data;
+                console.log('action.payload', action.payload);
+                if (action.payload.status) {
+                    state.data = action.payload.data;
                     state.recordCount = action.payload.data.total_count
                     state.success = 'true'; // Ensure success is a string
-                    state.entireResponse = action.payload?.data
                 } else {
                     state.success = 'false';
-                    state.statusCode = action.payload.statusCode;
+                    state.status = action.payload.status;
                     state.error = 'Error occurred while fetching list';
                 }
             })
