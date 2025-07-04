@@ -1,31 +1,35 @@
 import { useEffect } from "react"
-const useApi = '../services/useApi'
+import { useDispatch, useSelector } from "react-redux"
+
+import { RootState, AppDispatch } from "../store";
 import { Header } from "./Header"
 import { HeroSection } from "./HeroSection"
 import { BrandSection } from "./BrandSection"
 import { ProductSection } from "./ProductSection"
 import { StyleSection } from "./StyleSection"
 import { Footer } from "./Footer"
+import { fetchList } from '../store/slices/productSlice'
 
 const Homepage = () => {
-  const { getAPI } = useApi()
+  const dispatch = useDispatch<AppDispatch>()
+  const products = useSelector((state: RootState) => state.products.data)
   useEffect(() => {
-    const newArrivals = getAPI('products?offset=0&limit=10')
-    const casualProducts = getAPI('products?offset=10&limit=10')
+    const url: string =  'https://api.escuelajs.co/api/v1/products'
+    dispatch(fetchList(url)) 
   })
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <HeroSection />
       <BrandSection />
-      <ProductSection 
+      {/* <ProductSection 
         title="NEW ARRIVALS" 
-        products={newArrivals} 
+        // products={newArrivals} 
       />
       <ProductSection 
         title="CASUAL" 
-        products={casualProducts} 
-      />
+        // products={casualProducts} 
+      /> */}
       <StyleSection />
       <Footer />
     </div>
