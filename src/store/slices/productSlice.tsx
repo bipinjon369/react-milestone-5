@@ -36,8 +36,7 @@ export const fetchList = createAsyncThunk<ApiResponse, string, { rejectValue: Er
         try {
             const { getAPI } = useApi();
             const ApiResponse = await getAPI(`${payload}`);
-            console.log('ApiResponse', ApiResponse);
-            return { ...ApiResponse, status: ApiResponse.error }; // Return the status code along with the data
+            return { ...ApiResponse, status: !ApiResponse.error }; // Return the status code along with the data
         } catch (error: any) {
             console.error('Error fetching list:', error);
             return rejectWithValue({ message: error.message || 'Unknown error occurred' });
@@ -64,10 +63,10 @@ const productSlice = createSlice({
             })
             .addCase(fetchList.fulfilled, (state, action: PayloadAction<ApiResponse>) => {
                 state.loading = false;
-                console.log('action.payload', action.payload);
+                console.log('action.payload', action.payload.data.length);
                 if (action.payload.status) {
                     state.data = action.payload.data;
-                    state.recordCount = action.payload.data.total_count
+                    state.recordCount = action.payload.data.length
                     state.success = 'true'; // Ensure success is a string
                 } else {
                     state.success = 'false';

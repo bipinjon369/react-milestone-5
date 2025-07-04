@@ -53,6 +53,8 @@ module.exports = {
         'button-text': ['16px', { lineHeight: '100%', fontWeight: '400' }],
         'hero-stat-text': ['40px', { lineHeight: '100%', fontWeight: '700' }],
         'product-title-text': ['48px', { lineHeight: '100%', fontWeight: '400' }],
+        'product-card-title': ['20px', { lineHeight: '100%', fontWeight: '700' }],
+        'product-card-price': ['24px', { lineHeight: '100%', fontWeight: '700' }],
       },
       fontFamily: {
         alfa: ['Alfa Slab One', 'sans-serif'],

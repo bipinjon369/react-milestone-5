@@ -12,25 +12,39 @@ import { fetchList } from '../store/slices/productSlice'
 
 const Homepage = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const products = useSelector((state: RootState) => state.products.data)
+  const products = useSelector((state: RootState) => state.products)
   useEffect(() => {
     const url: string =  'products'
     dispatch(fetchList(url)) 
-  })
-  // console.log('products', products)
+  }, [])
+  console.log('The freakin state', products)
+  
+  if (products.loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black mx-auto mb-4"></div>
+          <p className="text-lg font-medium text-gray-700">Loading...</p>
+        </div>
+      </div>
+    )
+  }
+  
+  const newArrivals = products.data?.slice(0, 4) || []
+  const casualProducts = products.data?.slice(4, 16) || []
   return (
     <div className="min-h-screen bg-white">
       <Header />
       <HeroSection />
       <BrandSection />
-      {/* <ProductSection 
+      <ProductSection 
         title="NEW ARRIVALS" 
-        // products={newArrivals} 
+        products={newArrivals} 
       />
       <ProductSection 
         title="CASUAL" 
-        // products={casualProducts} 
-      /> */}
+        products={casualProducts} 
+      />
       <StyleSection />
       <Footer />
     </div>

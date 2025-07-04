@@ -5,30 +5,40 @@ interface StyleCategory {
 
 export const StyleSection = () => {
   const styleCategories: StyleCategory[] = [
-    { name: "Casual", image: "/placeholder.svg?height=200&width=300" },
-    { name: "Formal", image: "/placeholder.svg?height=200&width=300" },
-    { name: "Party", image: "/placeholder.svg?height=200&width=300" },
-    { name: "Gym", image: "/placeholder.svg?height=200&width=300" },
+    { name: "Casual", image: "casual.png" },
+    { name: "Formal", image: "formal.png" },
+    { name: "Party", image: "party.png" },
+    { name: "Gym", image: "gym.png" },
   ]
 
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center mb-12">BROWSE BY STYLE</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {styleCategories.map((category, index) => (
-            <div key={index} className="relative group cursor-pointer rounded-lg overflow-hidden">
-              <img
-                src={category.image || "/placeholder.svg"}
-                alt={category.name}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                <h3 className="text-white text-2xl font-bold">{category.name}</h3>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#F0F0F0] pt-[66px] pb-[76px] rounded-[40px]">
+        <h2 className="text-product-title-text font-alfa text-center mb-12">BROWSE BY STYLE</h2>
+          <div className="flex justify-center relative cursor-pointer overflow-hidden gap-5">
+            <img
+              src={styleCategories[0].image || "/placeholder.svg"}
+              alt={styleCategories[0].name}
+              className="w-[407px] object-contain hover:scale-105 rounded-[20px] transition-transform duration-300"
+            />
+            <img
+              src={styleCategories[1].image || "/placeholder.svg"}
+              alt={styleCategories[1].name}
+              className="w-[684px] object-contain hover:scale-105 rounded-[20px] transition-transform duration-300"
+            />
+          </div>
+          <div className="flex justify-center relative cursor-pointer overflow-hidden gap-5 pt-5">
+            <img
+              src={styleCategories[2].image || "/placeholder.svg"}
+              alt={styleCategories[2].name}
+              className="w-[684px] object-contain hover:scale-105 rounded-[20px] transition-transform duration-300"
+            />
+            <img
+              src={styleCategories[3].image || "/placeholder.svg"}
+              alt={styleCategories[3].name}
+              className="w-[407px] object-contain hover:scale-105 rounded-[20px] transition-transform duration-300"
+            />
+          </div>
       </div>
     </section>
   )
