@@ -2,7 +2,6 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import { RootState, AppDispatch } from "../store";
-import { Header } from "./Header"
 import { HeroSection } from "./HeroSection"
 import { BrandSection } from "./BrandSection"
 import { ProductSection } from "./ProductSection"
@@ -33,8 +32,7 @@ const Homepage = () => {
   const newArrivals = products.data?.slice(0, 4) || []
   const casualProducts = products.data?.slice(4, 16) || []
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <div>
       <HeroSection />
       <BrandSection />
       <ProductSection 

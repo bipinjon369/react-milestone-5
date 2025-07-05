@@ -5,7 +5,7 @@ import { RootState, AppDispatch } from "../store";
 import { Minus, Plus, Trash2, Tag, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Header } from "../components/Header";
+
 import { updateQuantity, removeItem } from "../store/slices/cartSlice";
 
 interface CartItemProps {
@@ -142,8 +142,7 @@ export default function Cart() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <div>
 
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center space-x-2 text-sm text-gray-500">

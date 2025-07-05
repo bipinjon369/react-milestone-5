@@ -23,7 +23,7 @@ export const Header = () => {
       </div>}
 
       {/* Header */}
-      <header className="border-b border-gray-200 py-6 px-[100px]">
+      <header className="sticky top-0 border-b border-gray-200 py-6 px-[100px] bg-white z-50">
         <div className="flex items-center justify-between">
           <Link to="/" className="font-alfa text-navbar-h1 font-bold">FAKESTORE</Link>
 
@@ -39,7 +39,7 @@ export const Header = () => {
 
           <div className="flex items-center">
             <div className="relative hidden md:block">
-              <img className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#00000066] w-6 h-6" src='search.svg' />
+              <img className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#00000066] w-6 h-6" src='/search.svg' />
               <input
                 type="text"
                 placeholder="Search for products..."
@@ -47,10 +47,10 @@ export const Header = () => {
               />
             </div>
             <Link to="/cart" className="pr-[14px]">
-              <img className="w-6 h-6" src='cart.svg' />
+              <img className="w-6 h-6" src='/cart.svg' />
             </Link>
             <button>
-              <img className="w-6 h-6" src='profile.svg' />
+              <img className="w-6 h-6" src='/profile.svg' />
             </button>
           </div>
         </div>

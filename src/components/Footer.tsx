@@ -43,7 +43,7 @@ export const Footer = () => {
               {Array(4)
                 .fill(0)
                 .map((_, i) => (
-                  <img key={i} src={`${i+1}.png`}></img>
+                  <img key={i} src={`/${i+1}.png`}></img>
                 ))}
             </div>
           </div>
@@ -75,7 +75,7 @@ export const Footer = () => {
               <div key={i}>
                 <img
                   className="object-cover block"
-                  src={`${method}.png`}
+                  src={`/${method}.png`}
                   alt={method}
                 />
               </div>

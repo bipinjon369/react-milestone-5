@@ -57,6 +57,7 @@ module.exports = {
         'product-card-price': ['24px', { lineHeight: '100%', fontWeight: '700' }],
         'footer-description-text': ['14px', { lineHeight: '22px', fontWeight: '400' }],
         'footer-menu-title': ['16px', { lineHeight: '18px', fontWeight: '500' }],
+        'product-view-price': ['32px', { lineHeight: '18px', fontWeight: '700' }],
       },
       fontFamily: {
         alfa: ['Alfa Slab One', 'sans-serif'],

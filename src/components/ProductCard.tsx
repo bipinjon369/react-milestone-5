@@ -1,5 +1,4 @@
-import { Star } from "lucide-react"
-
+import { useNavigate } from "react-router-dom";
 interface Product {
   id: number
   title: string
@@ -12,9 +11,14 @@ interface ProductCardProps {
   showRating?: boolean
 }
 
-export const ProductCard = ({ product, showRating = false }: ProductCardProps) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
+  const navigate = useNavigate();
+  // Handle edit button click
+    const handleClick = (productId: string) => {
+        navigate(`/product/${productId}`);
+    };
   return (
-    <div className="group cursor-pointer">
+    <div className="group cursor-pointer" onClick={() => handleClick(product.id.toString())}>
       <div className="bg-gray-100 rounded-[20px] overflow-hidden mb-4">
         <img
           src={product.images[0] || "/placeholder.svg"}
