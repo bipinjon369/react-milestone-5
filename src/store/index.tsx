@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 // example of importing the slice
 // import counterReducer from './counterSlice';
 import productReducer from '../store/slices/productSlice';
+import cartReducer from '../store/slices/cartSlice';
 
 const productPersistConfig = {
   key: 'transactionDetails',
@@ -14,6 +15,7 @@ const persistedProductReducer = persistReducer(productPersistConfig, productRedu
 export const store = configureStore({
   reducer: {
     products: persistedProductReducer,
+    cart: cartReducer,
   },
 });
 
