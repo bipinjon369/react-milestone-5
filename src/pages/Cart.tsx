@@ -5,7 +5,7 @@ import { RootState, AppDispatch } from "../store";
 import { Minus, Plus, Trash2, Tag, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-
+import { Breadcrumb } from "../components/Breadcrumb";
 import { updateQuantity, removeItem } from "../store/slices/cartSlice";
 
 interface CartItemProps {
@@ -91,12 +91,12 @@ const OrderSummaryRow = ({
   className?: string;
 }) => (
   <div className={`flex justify-between ${className}`}>
-    <span className={className.includes("font-bold") ? "" : "text-gray-600"}>
+    <span className={className.includes("font-bold") ? "" : "text-cart-price-details text-[#00000099]"}>
       {label}
     </span>
     <span
       className={
-        className.includes("font-bold") ? "font-bold" : "font-semibold"
+        className.includes("font-bold") ? "font-bold" : "text-cart-price-details"
       }
     >
       {value}
@@ -108,6 +108,11 @@ export default function Cart() {
   const [promoCode, setPromoCode] = useState("");
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector((state: RootState) => state.cart.data);
+  
+  const breadcrumbs = [
+    { label: 'Home', path: '/' },
+    { label: 'Cart', path: '/cart' }
+  ]
 
   const handleUpdateQuantity = (id: number, newQuantity: number) => {
     if (newQuantity < 1) return;
@@ -143,19 +148,10 @@ export default function Cart() {
 
   return (
     <div>
-
-      <div className="max-w-7xl mx-auto px-4 py-4">
-        <div className="flex items-center space-x-2 text-sm text-gray-500">
-          {["Home", "/", "Cart"].map((item, idx) => (
-            <span key={idx} className={idx === 2 ? "text-black" : ""}>
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
+      <Breadcrumb items={breadcrumbs} />
 
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-black mb-8">YOUR CART</h1>
+        <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
@@ -171,7 +167,7 @@ export default function Cart() {
 
           <div className="space-y-6">
             <div className="border border-gray-200 rounded-lg p-6">
-              <h2 className="text-xl font-bold mb-6">Order Summary</h2>
+              <h2 className="text-product-card-price mb-6">Order Summary</h2>
 
               <div className="space-y-4">
                 {summaryItems.slice(0, -1).map((item, idx) => (

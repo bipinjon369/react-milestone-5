@@ -11,11 +11,17 @@ const productPersistConfig = {
   key: 'transactionDetails',
   storage,
 };
+
+const cartPersistConfig = {
+  key: 'cart',
+  storage,
+};
 const persistedProductReducer = persistReducer(productPersistConfig, productReducer);
+const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
 export const store = configureStore({
   reducer: {
     products: persistedProductReducer,
-    cart: cartReducer,
+    cart: persistedCartReducer,
   },
 });
 

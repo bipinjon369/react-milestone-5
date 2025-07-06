@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Star, Minus, Plus, Check } from "lucide-react";
 import Button from "../components/Button";
 import { Footer } from "../components/Footer";
+import { Breadcrumb } from "../components/Breadcrumb";
+import ToastMessage from "../components/ToastMessage";
+import { AppDispatch } from "../store";
+import { updateCart } from "../store/slices/cartSlice";
 import useApi from "../services/useApi";
 
 const LoadingSpinner = ({ message }: { message: string }) => (
@@ -103,6 +108,7 @@ const SelectionGroup = ({
 export default function ProductDetails() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const { getAPI } = useApi();
 
   const [product, setProduct] = useState<any>(null);
@@ -110,6 +116,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState("Large");
   const [selectedColor, setSelectedColor] = useState("brown");
   const [quantity, setQuantity] = useState(1);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -147,30 +154,7 @@ export default function ProductDetails() {
 
   return (
     <div>
-      <div className="mx-[85px] px-4 pt-4">
-        <div className="flex items-center space-x-2 text-sm text-gray-500">
-          {breadcrumbs.map((item, idx) => (
-            <>
-              {idx === breadcrumbs.length - 1 ? (
-                <span key={idx} className="text-black">
-                  {item.label}
-                </span>
-              ) : (
-                <button
-                  key={idx}
-                  onClick={() => navigate(item.path)}
-                  className="hover:text-black transition-colors"
-                >
-                  {item.label}
-                </button>
-              )}
-              {idx < breadcrumbs.length - 1 && (
-                <img src="/divider.svg" alt="divider" className="w-4 h-4" />
-              )}
-            </>
-          ))}
-        </div>
-      </div>
+      <Breadcrumb items={breadcrumbs} />
 
       <div className="mx-[100px] px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-5">
@@ -229,11 +213,63 @@ export default function ProductDetails() {
             </div>
             <div className="flex space-x-5">
               <QuantitySelector quantity={quantity} onUpdate={setQuantity} />
-              <Button buttonText="Add to Cart" width="400px" />
+              <Button 
+                buttonText="Add to Cart" 
+                width="400px" 
+                onClick={() => {
+                  const cartItem = {
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                    image: product.images?.[0] || product.category?.image,
+                    size: selectedSize,
+                    color: selectedColor,
+                    quantity
+                  };
+                  
+                  // Get current cart from localStorage or use empty array
+                  const currentCart = JSON.parse(localStorage.getItem('persist:cart') || '{}');
+                  const cartData = currentCart.data ? JSON.parse(currentCart.data) : [];
+                  
+                  // Check if item already exists
+                  const existingItemIndex = cartData.findIndex(
+                    (item: any) => item.id === product.id && item.size === selectedSize && item.color === selectedColor
+                  );
+                  
+                  let updatedCart;
+                  if (existingItemIndex >= 0) {
+                    // Update quantity if item exists
+                    updatedCart = cartData.map((item: any, index: number) => 
+                      index === existingItemIndex 
+                        ? { ...item, quantity: item.quantity + quantity }
+                        : item
+                    );
+                  } else {
+                    // Add new item
+                    updatedCart = [...cartData, cartItem];
+                  }
+                  
+                  dispatch(updateCart(updatedCart));
+                  setShowToast(true);
+                  setTimeout(() => setShowToast(false), 3000);
+                }}
+              />
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Toast Message */}
+      {showToast && (
+        <div className="fixed top-4 right-4 z-50 animate-slide-in-right">
+          <ToastMessage 
+            message="Product added to cart successfully!" 
+            type="success" 
+            onClose={() => setShowToast(false)}
+          />
+        </div>
+      )}
+      
       <Footer />
     </div>
   );
