@@ -45,8 +45,21 @@ const cartSlice = createSlice({
         },
         setDeliveryFee: (state, action: PayloadAction<number>) => {
             state.deliveryFee = action.payload;
+        },
+        addItem: (state, action: PayloadAction<any>) => {
+            const newItem = action.payload;
+            const existingItemIndex = state.data?.findIndex(
+                item => item.id === newItem.id && item.size === newItem.size && item.color === newItem.color
+            ) ?? -1;
+            
+            if (existingItemIndex >= 0 && state.data) {
+                state.data[existingItemIndex].quantity += newItem.quantity;
+            } else {
+                state.data = [...(state.data || []), newItem];
+            }
+            state.recordCount = state.data?.length || 0;
         }
     },
 });
-export const { resetState, updateCart, updateQuantity, removeItem, setDiscount, setDeliveryFee } = cartSlice.actions;
+export const { resetState, updateCart, updateQuantity, removeItem, setDiscount, setDeliveryFee, addItem } = cartSlice.actions;
 export default cartSlice.reducer;

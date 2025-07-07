@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Star, Minus, Plus, Check } from "lucide-react";
 import Button from "../components/Button";
 import { Footer } from "../components/Footer";
 import { Breadcrumb } from "../components/Breadcrumb";
 import ToastMessage from "../components/ToastMessage";
-import { AppDispatch } from "../store";
-import { updateCart } from "../store/slices/cartSlice";
+import { AppDispatch, RootState } from "../store";
+import { addItem } from "../store/slices/cartSlice";
 import useApi from "../services/useApi";
 
 const LoadingSpinner = ({ message }: { message: string }) => (
@@ -110,6 +110,7 @@ export default function ProductDetails() {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const { getAPI } = useApi();
+  const cartItems = useSelector((state: RootState) => state.cart.data || []);
 
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -117,6 +118,11 @@ export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState("brown");
   const [quantity, setQuantity] = useState(1);
   const [showToast, setShowToast] = useState(false);
+  
+  // Check if current product with selected options is already in cart
+  const isInCart = cartItems.some(
+    (item: any) => item.id === product?.id && item.size === selectedSize && item.color === selectedColor
+  );
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -214,44 +220,28 @@ export default function ProductDetails() {
             <div className="flex space-x-5">
               <QuantitySelector quantity={quantity} onUpdate={setQuantity} />
               <Button 
-                buttonText="Add to Cart" 
-                width="400px" 
+                buttonText={isInCart ? "Product is already in cart" : "Add to Cart"}
+                width="400px"
+                disabled={isInCart}
                 onClick={() => {
-                  const cartItem = {
-                    id: product.id,
-                    name: product.title,
-                    price: product.price,
-                    image: product.images?.[0] || product.category?.image,
-                    size: selectedSize,
-                    color: selectedColor,
-                    quantity
-                  };
-                  
-                  // Get current cart from localStorage or use empty array
-                  const currentCart = JSON.parse(localStorage.getItem('persist:cart') || '{}');
-                  const cartData = currentCart.data ? JSON.parse(currentCart.data) : [];
-                  
-                  // Check if item already exists
-                  const existingItemIndex = cartData.findIndex(
-                    (item: any) => item.id === product.id && item.size === selectedSize && item.color === selectedColor
-                  );
-                  
-                  let updatedCart;
-                  if (existingItemIndex >= 0) {
-                    // Update quantity if item exists
-                    updatedCart = cartData.map((item: any, index: number) => 
-                      index === existingItemIndex 
-                        ? { ...item, quantity: item.quantity + quantity }
-                        : item
-                    );
-                  } else {
-                    // Add new item
-                    updatedCart = [...cartData, cartItem];
+                  if (!isInCart) {
+                    const cartItem = {
+                      id: product.id,
+                      name: product.title,
+                      price: product.price,
+                      image: product.images?.[0] || product.category?.image,
+                      size: selectedSize,
+                      color: selectedColor,
+                      quantity
+                    };
+                    
+                    dispatch(addItem(cartItem));
+                    setShowToast(true);
+                    setTimeout(() => {
+                      setShowToast(false);
+                      navigate('/');
+                    }, 1500);
                   }
-                  
-                  dispatch(updateCart(updatedCart));
-                  setShowToast(true);
-                  setTimeout(() => setShowToast(false), 3000);
                 }}
               />
             </div>

@@ -15,7 +15,7 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) => (
-  <div className="flex items-center space-x-4 p-6 border border-gray-200 rounded-lg">
+  <div className="flex items-center space-x-4 p-6">
     <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
       <img
         src={item.image}
@@ -44,7 +44,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) => (
         </button>
       </div>
       <div className="flex items-center justify-between">
-        <span className="text-xl font-bold">${item.price}</span>
+        <span className="text-product-card-price">${item.price}</span>
         <div className="flex items-center bg-gray-100 rounded-full">
           {[
             { icon: Minus, action: -1 },
@@ -91,12 +91,12 @@ const OrderSummaryRow = ({
   className?: string;
 }) => (
   <div className={`flex justify-between ${className}`}>
-    <span className={className.includes("font-bold") ? "" : "text-cart-price-details text-[#00000099]"}>
+    <span className={className.includes("font-bold") ? "text-cart-price-details text-[#111111]" : "text-cart-price-details text-[#00000099]"}>
       {label}
     </span>
     <span
       className={
-        className.includes("font-bold") ? "font-bold" : "text-cart-price-details"
+        className.includes("font-bold") ? "text-[#111111] text-product-card-price" : "text-product-card-title"
       }
     >
       {value}
@@ -142,7 +142,7 @@ export default function Cart() {
     {
       label: "Total",
       value: `$${total.toFixed(0)}`,
-      className: "text-lg font-bold",
+      className: "font-bold",
     },
   ];
 
@@ -154,26 +154,32 @@ export default function Cart() {
         <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            {cartItems.map((item) => (
-              <CartItem
-                key={item.id}
-                item={item}
-                onUpdateQuantity={handleUpdateQuantity}
-                onRemove={handleRemoveItem}
-              />
-            ))}
+          <div className="lg:col-span-2">
+            <div className="border border-gray-200 rounded-[20px]">
+              {cartItems.map((item, index) => (
+                <div key={item.id}>
+                  <CartItem
+                    item={item}
+                    onUpdateQuantity={handleUpdateQuantity}
+                    onRemove={handleRemoveItem}
+                  />
+                  {index < cartItems.length - 1 && (
+                    <div className="mx-6 border-b border-gray-200" />
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="space-y-6">
-            <div className="border border-gray-200 rounded-lg p-6">
+            <div className="border border-[#0000001A] rounded-[20px] p-6">
               <h2 className="text-product-card-price mb-6">Order Summary</h2>
 
               <div className="space-y-4">
                 {summaryItems.slice(0, -1).map((item, idx) => (
                   <OrderSummaryRow key={idx} {...item} />
                 ))}
-                <hr className="my-4" />
+                <div className="my-4 h-px bg-[#0000001A]" />
                 <OrderSummaryRow {...summaryItems[summaryItems.length - 1]} />
               </div>
 
@@ -186,7 +192,7 @@ export default function Cart() {
                       placeholder="Add promo code"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      className="pl-10 rounded-full border-gray-300"
+                      className="pl-10 rounded-[20px] border-gray-300"
                     />
                   </div>
                   <Button className="bg-black text-white px-6 rounded-full hover:bg-gray-800">

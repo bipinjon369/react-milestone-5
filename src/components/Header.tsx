@@ -1,10 +1,13 @@
 import { Search, ShoppingCart, User, ChevronDown, X } from "lucide-react"
-import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from "../store"
+import { hideSignUpBanner } from "../store/slices/uiSlice"
 
 export const Header = () => {
-  const [ showSignUpOffer, setShowSignUpOffer ] = useState<boolean>(true)
-  const setSignUpOffer = () => setShowSignUpOffer(false) // Sign
+  const dispatch = useDispatch()
+  const showSignUpOffer = useSelector((state: RootState) => state.ui.showSignUpBanner)
+  const handleCloseSignUpOffer = () => dispatch(hideSignUpBanner())
   return (
     <>
       {/* Promotional Banner */}
@@ -17,7 +20,7 @@ export const Header = () => {
             <span className="underline font-medium cursor-pointer">Sign Up Now</span>
           </span>
           <button className="absolute right-0 p-1">
-            <X className="w-4 h-4" onClick={setSignUpOffer} />
+            <X className="w-4 h-4" onClick={handleCloseSignUpOffer} />
           </button>
         </div>
       </div>}

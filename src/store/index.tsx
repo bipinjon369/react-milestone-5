@@ -6,6 +6,7 @@ import storage from 'redux-persist/lib/storage';
 // import counterReducer from './counterSlice';
 import productReducer from '../store/slices/productSlice';
 import cartReducer from '../store/slices/cartSlice';
+import uiReducer from '../store/slices/uiSlice';
 
 const productPersistConfig = {
   key: 'transactionDetails',
@@ -16,12 +17,19 @@ const cartPersistConfig = {
   key: 'cart',
   storage,
 };
+
+const uiPersistConfig = {
+  key: 'ui',
+  storage,
+};
 const persistedProductReducer = persistReducer(productPersistConfig, productReducer);
 const persistedCartReducer = persistReducer(cartPersistConfig, cartReducer);
+const persistedUiReducer = persistReducer(uiPersistConfig, uiReducer);
 export const store = configureStore({
   reducer: {
     products: persistedProductReducer,
     cart: persistedCartReducer,
+    ui: persistedUiReducer,
   },
 });
 
