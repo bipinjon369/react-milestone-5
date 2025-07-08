@@ -7,15 +7,27 @@ import { BrandSection } from "./BrandSection"
 import { ProductSection } from "./ProductSection"
 import { StyleSection } from "./StyleSection"
 import { Footer } from "./Footer"
+import ToastMessage from "./ToastMessage"
 import { fetchList } from '../store/slices/productSlice'
+import { hideToast } from "../store/slices/uiSlice"
 
 const Homepage = () => {
   const dispatch = useDispatch<AppDispatch>()
   const products = useSelector((state: RootState) => state.products)
+  const toast = useSelector((state: RootState) => state.ui.toast)
   useEffect(() => {
     const url: string =  'products'
     dispatch(fetchList(url)) 
   }, [])
+  
+  useEffect(() => {
+    if (toast.show) {
+      const timer = setTimeout(() => {
+        dispatch(hideToast())
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [toast.show, dispatch])
   console.log('The freakin state', products)
   
   if (products.loading) {
@@ -45,6 +57,17 @@ const Homepage = () => {
       />
       <StyleSection />
       <Footer />
+      
+      {/* Toast Message */}
+      {toast.show && (
+        <div className="fixed top-6 right-6 z-50 p-4">
+          <ToastMessage 
+            message={toast.message} 
+            type={toast.type} 
+            onClose={() => dispatch(hideToast())}
+          />
+        </div>
+      )}
     </div>
   )
 }

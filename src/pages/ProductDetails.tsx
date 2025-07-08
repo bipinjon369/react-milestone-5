@@ -8,6 +8,7 @@ import { Breadcrumb } from "../components/Breadcrumb";
 import ToastMessage from "../components/ToastMessage";
 import { AppDispatch, RootState } from "../store";
 import { addItem } from "../store/slices/cartSlice";
+import { showToast } from "../store/slices/uiSlice";
 import useApi from "../services/useApi";
 
 const LoadingSpinner = ({ message }: { message: string }) => (
@@ -117,7 +118,7 @@ export default function ProductDetails() {
   const [selectedSize, setSelectedSize] = useState("Large");
   const [selectedColor, setSelectedColor] = useState("brown");
   const [quantity, setQuantity] = useState(1);
-  const [showToast, setShowToast] = useState(false);
+
   
   // Check if current product with selected options is already in cart
   const isInCart = cartItems.some(
@@ -162,16 +163,16 @@ export default function ProductDetails() {
     <div>
       <Breadcrumb items={breadcrumbs} />
 
-      <div className="mx-[100px] px-4 py-8">
+      <div className="mx-4 lg:mx-8 xl:mx-[100px] px-4 py-8">
         <div className="grid lg:grid-cols-2 gap-5">
-          <div className="flex ml-[100px] gap-[30px]">
+          <div className="flex ml-0 lg:ml-8 xl:ml-[100px] gap-4 lg:gap-[30px]">
             <div>
               {(product.images || [])
                 .slice(0, 3)
                 .map((img: string, i: number) => (
                   <div
                     key={i}
-                    className="w-[152px] h-[208px] overflow-hidden pb-[14px]"
+                    className="w-[120px] lg:w-[152px] h-[160px] lg:h-[208px] overflow-hidden pb-[14px]"
                   >
                     <img
                       src={img}
@@ -181,7 +182,7 @@ export default function ProductDetails() {
                   </div>
                 ))}
             </div>
-            <div className="w-[444px] h-[610px] overflow-hidden">
+            <div className="w-[300px] lg:w-[380px] xl:w-[444px] h-[400px] lg:h-[500px] xl:h-[610px] overflow-hidden">
               <img
                 src={product.images[0] || product.images?.[0]}
                 alt={product.title}
@@ -217,11 +218,12 @@ export default function ProductDetails() {
                 onSelect={setSelectedSize}
               />
             </div>
-            <div className="flex space-x-5">
+            <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-5">
               <QuantitySelector quantity={quantity} onUpdate={setQuantity} />
               <Button 
                 buttonText={isInCart ? "Product is already in cart" : "Add to Cart"}
-                width="400px"
+                width="100%"
+                className="lg:w-[400px]"
                 disabled={isInCart}
                 onClick={() => {
                   if (!isInCart) {
@@ -236,11 +238,11 @@ export default function ProductDetails() {
                     };
                     
                     dispatch(addItem(cartItem));
-                    setShowToast(true);
-                    setTimeout(() => {
-                      setShowToast(false);
-                      navigate('/');
-                    }, 1500);
+                    dispatch(showToast({ 
+                      message: 'Product added to cart successfully!', 
+                      type: 'success' 
+                    }));
+                    navigate('/');
                   }
                 }}
               />
@@ -249,16 +251,7 @@ export default function ProductDetails() {
         </div>
       </div>
       
-      {/* Toast Message */}
-      {showToast && (
-        <div className="fixed top-4 right-4 z-50 animate-slide-in-right">
-          <ToastMessage 
-            message="Product added to cart successfully!" 
-            type="success" 
-            onClose={() => setShowToast(false)}
-          />
-        </div>
-      )}
+
       
       <Footer />
     </div>

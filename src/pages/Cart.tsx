@@ -15,8 +15,8 @@ interface CartItemProps {
 }
 
 const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) => (
-  <div className="flex items-center space-x-4 p-6">
-    <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+  <div className="flex items-center space-x-3 lg:space-x-4 p-4 lg:p-6">
+    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
       <img
         src={item.image}
         alt={item.name}
@@ -26,7 +26,7 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) => (
     <div className="flex-1 space-y-2">
       <div className="flex items-start justify-between">
         <div>
-          <h3 className="font-semibold text-lg">{item.name}</h3>
+          <h3 className="font-semibold text-base lg:text-lg">{item.name}</h3>
           {["size", "color"].map(
             (attr) =>
               item[attr] && (
@@ -150,10 +150,10 @@ export default function Cart() {
     <div>
       <Breadcrumb items={breadcrumbs} />
 
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
         <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-2">
             <div className="border border-gray-200 rounded-[20px]">
               {cartItems.map((item, index) => (

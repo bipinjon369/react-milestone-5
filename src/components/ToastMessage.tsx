@@ -14,9 +14,9 @@ export default function ToastMessage({ message, type, onClose }: ToastMessagePro
   return (
     <div className={`flex items-center border ${
       type === 'success' ? 'bg-[#EBFFF1] border-[#22C348]' : 'bg-[#FEF3F2] border-[#F04438]'
-    } w-[350px] h-[52px] rounded-[8px] shadow-[0px_16px_20px_-8px_#0305121A]`}>
+    } w-[420px] h-[52px] rounded-[8px] shadow-[0px_16px_20px_-8px_#0305121A]`}>
       <img 
-        className="ml-[16px] mr-3" 
+        className="ml-[16px] mr-3 py-5" 
         src={`/${type}_toast.svg`} 
         alt={type === 'success' ? 'Success' : 'Error'} 
       />
