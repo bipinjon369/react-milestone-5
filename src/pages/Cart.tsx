@@ -50,17 +50,25 @@ const CartItem = ({ item, onUpdateQuantity, onRemove }: CartItemProps) => (
             { icon: Minus, action: -1 },
             { icon: Plus, action: 1 },
           ]
-            .map(({ icon: Icon, action }, idx) => (
-              <button
-                key={idx}
-                onClick={() =>
-                  onUpdateQuantity(item.id, item.quantity + action)
-                }
-                className="p-2 hover:bg-gray-200 rounded-full"
-              >
-                <Icon className="w-4 h-4" />
-              </button>
-            ))
+            .map(({ icon: Icon, action }, idx) => {
+              const isMinusDisabled = idx === 0 && item.quantity === 1;
+              return (
+                <button
+                  key={idx}
+                  onClick={() =>
+                    onUpdateQuantity(item.id, item.quantity + action)
+                  }
+                  disabled={isMinusDisabled}
+                  className={`p-2 rounded-full ${
+                    isMinusDisabled
+                      ? 'cursor-not-allowed opacity-50'
+                      : 'hover:bg-gray-200'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                </button>
+              );
+            })
             .reduce(
               (acc, btn, idx) => [
                 ...acc,
@@ -128,7 +136,7 @@ export default function Cart() {
     0
   );
   const discount = subtotal * 0.2;
-  const deliveryFee = 15;
+  const deliveryFee = cartItems.length > 0 ? 15 : 0;
   const total = subtotal - discount + deliveryFee;
 
   const summaryItems = [
@@ -153,6 +161,21 @@ export default function Cart() {
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
         <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
 
+        {cartItems.length === 0 ? (
+          <div className="text-center py-16">
+            <div className="w-24 h-24 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
+              <Trash2 className="w-12 h-12 text-gray-400" />
+            </div>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Your cart is empty</h2>
+            <p className="text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
+            <Button 
+              onClick={() => window.location.href = '/'}
+              className="bg-black text-white px-8 py-3 rounded-full hover:bg-gray-800"
+            >
+              Continue Shopping
+            </Button>
+          </div>
+        ) : (
         <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
           <div className="lg:col-span-2">
             <div className="border border-gray-200 rounded-[20px]">
@@ -208,6 +231,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
+        )}
       </div>
     </div>
   );
