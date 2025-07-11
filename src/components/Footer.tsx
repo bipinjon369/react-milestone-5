@@ -32,12 +32,12 @@ export const Footer = () => {
   return (
     <footer className="bg-[#F0F0F0] py-16">
       <div className="px-8 lg:px-[100px]">
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-[106px]">
-          <div className="md:col-span-2 lg:col-span-1">
+        <div className="flex flex-col md:flex-row gap-[106px]">
+          <div className="w-fit max-w-xs">
             <h3 className="text-navbar-h1 font-alfa mb-[25px]">FAKESTORE</h3>
-            <p className="text-[#00000099] text-footer-description-text mb-4">
-              We have clothes that suits your style and which you're proud to
-              wear. From women to men.
+            <p className="text-[#00000099] text-footer-description-text mb-[35px]">
+              We have clothes that suits your style<br/>and which you're proud to
+              wear.<br/>From women to men.
             </p>
             <div className="flex gap-3">
               {Array(4)
