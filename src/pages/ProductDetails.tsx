@@ -95,7 +95,7 @@ const SelectionGroup = ({
             className={`px-6 py-3 rounded-full border ${
               isSelected
                 ? "bg-black text-white border-black"
-                : "bg-gray-100 text-[#00000099] border-gray-300"
+                : "bg-[#F0F0F0] text-[#00000099] border-gray-300"
             }`}
           >
             {value}
