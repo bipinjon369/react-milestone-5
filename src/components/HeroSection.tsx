@@ -2,7 +2,7 @@ import Button from './Button'
 
 export const HeroSection = () => {
   return (
-    <section className="h-[calc(        -223px)] pb-[122px] pt-[93px] px-[100px] bg-[url('/hero_background.png')] bg-contain bg-right bg-no-repeat bg-[#F2F0F1]">
+    <section className="h-[calc(100vh-223px)] pb-[122px] pt-[93px] px-[100px] bg-[url('/hero_background.png')] bg-contain bg-right bg-no-repeat bg-[#F2F0F1]">
       <div className="">
         <div>
           <div>

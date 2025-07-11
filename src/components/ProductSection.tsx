@@ -25,7 +25,7 @@ export const ProductSection = ({
     <section className={`py-16 ${backgroundColor}`}>
       <div className="px-4 sm:px-6 lg:px-[100px]">
         <h2 className="text-product-title-text font-alfa text-center mb-12">{title}</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-[61px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-[61px] 2xl:gap-x-8">
           {products.map((product) => (
             <ProductCard 
               key={product.id} 
