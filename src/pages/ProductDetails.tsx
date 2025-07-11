@@ -163,9 +163,9 @@ export default function ProductDetails() {
     <div>
       <Breadcrumb items={breadcrumbs} />
 
-      <div className="mx-4 lg:mx-8 xl:mx-[100px] px-4 py-8">
-        <div className="grid lg:grid-cols-2 gap-5">
-          <div className="flex ml-0 lg:ml-8 xl:ml-[100px] gap-4 lg:gap-[30px]">
+      <div className="mx-[100px] py-8">
+        <div className="grid lg:grid-cols-2 gap-[41px]">
+          <div className="flex ml-0 gap-[13px]">
             <div>
               {(product.images || [])
                 .slice(0, 3)

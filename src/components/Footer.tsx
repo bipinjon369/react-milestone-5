@@ -53,7 +53,7 @@ export const Footer = () => {
               <h4 className="text-footer-menu-title text-[#111111] mb-6">
                 {section.title}
               </h4>
-              <ul className="space-y-7 text-[#00000099] text-footer-menu-text">
+              <ul className="space-y-6 text-[#00000099] text-footer-menu-text">
                 {section.links.map((link) => (
                   <li key={link}>
                     <a href="#" className="hover:text-black">

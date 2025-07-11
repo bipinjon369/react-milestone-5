@@ -158,7 +158,7 @@ export default function Cart() {
     <div>
       <Breadcrumb items={breadcrumbs} />
 
-      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8">
+      <div className="mx-[100px] py-8">
         <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
 
         {cartItems.length === 0 ? (
@@ -176,8 +176,8 @@ export default function Cart() {
             </Button>
           </div>
         ) : (
-        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
-          <div className="lg:col-span-2">
+        <div className="flex flex-row gap-[20px]">
+          <div className="flex-1">
             <div className="border border-gray-200 rounded-[20px]">
               {cartItems.map((item, index) => (
                 <div key={item.id}>
@@ -194,7 +194,7 @@ export default function Cart() {
             </div>
           </div>
 
-          <div className="space-y-6">
+          <div className="w-[505px] space-y-6">
             <div className="border border-[#0000001A] rounded-[20px] p-6">
               <h2 className="text-product-card-price mb-6">Order Summary</h2>
 
@@ -215,16 +215,16 @@ export default function Cart() {
                       placeholder="Add promo code"
                       value={promoCode}
                       onChange={(e) => setPromoCode(e.target.value)}
-                      className="pl-10 rounded-[20px] border-gray-300"
+                      className="pl-10 w-[326px] h-[48px] rounded-[62px] border-gray-300 bg-[#F0F0F0]"
                     />
                   </div>
-                  <Button className="bg-black text-white px-6 rounded-full hover:bg-gray-800">
+                  <Button className="bg-black w-[119px] h-[48px] text-white px-6 rounded-full hover:bg-gray-800">
                     Apply
                   </Button>
                 </div>
               </div>
 
-              <Button className="w-full bg-black text-white py-4 rounded-full hover:bg-gray-800 mt-6 flex items-center justify-center space-x-2">
+              <Button className="w-full h-[60px] bg-black text-white py-4 rounded-full hover:bg-gray-800 mt-6 flex items-center justify-center space-x-2">
                 <span>Go to Checkout</span>
                 <ArrowRight className="w-4 h-4" />
               </Button>
