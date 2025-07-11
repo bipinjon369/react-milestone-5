@@ -23,7 +23,7 @@ export const ProductSection = ({
 }: ProductSectionProps) => {
   return (
     <section className={`py-16 ${backgroundColor}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-[100px]">
         <h2 className="text-product-title-text font-alfa text-center mb-12">{title}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-[61px]">
           {products.map((product) => (

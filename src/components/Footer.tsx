@@ -31,11 +31,11 @@ export const Footer = () => {
 
   return (
     <footer className="bg-[#F0F0F0] py-16">
-      <div className="mx-auto px-8 lg:px-16 xl:px-[101px]">
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 lg:gap-8 xl:gap-[106px]">
-          <div className="md:col-span-2 lg:col-span-1 pr-4 lg:pr-8">
-            <h3 className="text-navbar-h1 font-alfa mb-4">FAKESTORE</h3>
-            <p className="text-[#00000099] text-footer-description-text mb-4 pr-2 lg:pr-0">
+      <div className="px-8 lg:px-[100px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-[106px]">
+          <div className="md:col-span-2 lg:col-span-1">
+            <h3 className="text-navbar-h1 font-alfa mb-[25px]">FAKESTORE</h3>
+            <p className="text-[#00000099] text-footer-description-text mb-4">
               We have clothes that suits your style and which you're proud to
               wear. From women to men.
             </p>
@@ -49,11 +49,11 @@ export const Footer = () => {
           </div>
 
           {footerSections.map((section) => (
-            <div key={section.title} className="md:col-span-1">
+            <div key={section.title}>
               <h4 className="text-footer-menu-title text-[#111111] mb-6">
                 {section.title}
               </h4>
-              <ul className="space-y-2 text-[#00000099]">
+              <ul className="space-y-7 text-[#00000099] text-footer-menu-text">
                 {section.links.map((link) => (
                   <li key={link}>
                     <a href="#" className="hover:text-black">

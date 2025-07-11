@@ -13,7 +13,7 @@ export const StyleSection = () => {
 
   return (
     <section className="py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-[#F0F0F0] pt-[66px] pb-[76px] rounded-[40px]">
+      <div className="px-4 sm:px-6 lg:mx-[100px] bg-[#F0F0F0] pt-[66px] pb-[76px] rounded-[40px]">
         <h2 className="text-product-title-text font-alfa text-center mb-12">BROWSE BY STYLE</h2>
           <div className="flex justify-center relative cursor-pointer overflow-hidden gap-5">
             <img
