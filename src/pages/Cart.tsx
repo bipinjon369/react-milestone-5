@@ -6,6 +6,7 @@ import { Minus, Plus, Trash2, Tag, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Breadcrumb } from "../components/Breadcrumb";
+import { Footer } from "../components/Footer";
 import { updateQuantity, removeItem } from "../store/slices/cartSlice";
 
 interface CartItemProps {
@@ -156,10 +157,14 @@ export default function Cart() {
 
   return (
     <div>
-      <Breadcrumb items={breadcrumbs} />
+      <div className="sticky top-[95px] bg-white z-40 pb-4">
+        <Breadcrumb items={breadcrumbs} />
+        <div className="mx-[100px] pt-8">
+          <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
+        </div>
+      </div>
 
-      <div className="mx-[100px] py-8">
-        <h1 className="text-navbar-h1 font-alfa mb-8">Your cart</h1>
+      <div className="mx-[100px] pb-[114px]">
 
         {cartItems.length === 0 ? (
           <div className="text-center py-16">
@@ -233,6 +238,7 @@ export default function Cart() {
         </div>
         )}
       </div>
+      <Footer />
     </div>
   );
 }
