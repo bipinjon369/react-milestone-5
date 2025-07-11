@@ -7,6 +7,7 @@ import { hideSignUpBanner } from "../store/slices/uiSlice"
 export const Header = () => {
   const dispatch = useDispatch()
   const showSignUpOffer = useSelector((state: RootState) => state.ui.showSignUpBanner)
+  const cartItems = useSelector((state: RootState) => state.cart.data || [])
   const handleCloseSignUpOffer = () => dispatch(hideSignUpBanner())
   return (
     <>
@@ -49,8 +50,13 @@ export const Header = () => {
                 className="pl-10 pr-4 py-3 w-[250px] lg:w-[300px] xl:w-[505px] bg-[#F0F0F0] border-0 rounded-[62px] outline-none mr-4 lg:mr-6 xl:mr-10"
               />
             </div>
-            <Link to="/cart" className="pr-3 lg:pr-[14px]">
+            <Link to="/cart" className="pr-3 lg:pr-[14px] relative">
               <img className="w-7 h-7 lg:w-6 lg:h-6" src='/cart.svg' />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 left-3 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
             </Link>
             <button>
               <img className="w-7 h-7 lg:w-6 lg:h-6" src='/profile.svg' />

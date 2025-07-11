@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState, AppDispatch } from "../store";
@@ -118,6 +118,10 @@ export default function Cart() {
   const dispatch = useDispatch<AppDispatch>();
   const cartItems = useSelector((state: RootState) => state.cart.data);
   
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
   const breadcrumbs = [
     { label: 'Home', path: '/' },
     { label: 'Cart', path: '/cart' }
@@ -184,7 +188,7 @@ export default function Cart() {
         <div className="flex flex-row gap-[20px]">
           <div className="flex-1">
             <div className="border border-gray-200 rounded-[20px]">
-              {cartItems.map((item, index) => (
+              {[...cartItems].reverse().map((item, index) => (
                 <div key={item.id}>
                   <CartItem
                     item={item}

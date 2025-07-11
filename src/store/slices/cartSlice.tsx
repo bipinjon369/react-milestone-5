@@ -57,7 +57,7 @@ const cartSlice = createSlice({
             } else {
                 state.data = [...(state.data || []), newItem];
             }
-            state.recordCount = state.data?.length || 0;
+            state.recordCount = state.data?.reduce((total, item) => total + item.quantity, 0) || 0;
         }
     },
 });

@@ -126,6 +126,7 @@ export default function ProductDetails() {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchProduct = async () => {
       try {
         setLoading(true);
@@ -221,29 +222,26 @@ export default function ProductDetails() {
             <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-5">
               <QuantitySelector quantity={quantity} onUpdate={setQuantity} />
               <Button 
-                buttonText={isInCart ? "Product is already in cart" : "Add to Cart"}
+                buttonText="Add to Cart"
                 width="100%"
                 className="lg:w-[400px]"
-                disabled={isInCart}
                 onClick={() => {
-                  if (!isInCart) {
-                    const cartItem = {
-                      id: product.id,
-                      name: product.title,
-                      price: product.price,
-                      image: product.images?.[0] || product.category?.image,
-                      size: selectedSize,
-                      color: selectedColor,
-                      quantity
-                    };
-                    
-                    dispatch(addItem(cartItem));
-                    dispatch(showToast({ 
-                      message: 'Product added to cart successfully!', 
-                      type: 'success' 
-                    }));
-                    navigate('/');
-                  }
+                  const cartItem = {
+                    id: product.id,
+                    name: product.title,
+                    price: product.price,
+                    image: product.images?.[0] || product.category?.image,
+                    size: selectedSize,
+                    color: selectedColor,
+                    quantity
+                  };
+                  
+                  dispatch(addItem(cartItem));
+                  dispatch(showToast({ 
+                    message: isInCart ? 'Cart updated successfully!' : 'Product added to cart successfully!', 
+                    type: 'success' 
+                  }));
+                  navigate('/');
                 }}
               />
             </div>
